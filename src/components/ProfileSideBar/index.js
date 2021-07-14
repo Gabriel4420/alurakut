@@ -2,7 +2,7 @@ import React from 'react';
 
 import Box from '../Box';
 
-const ProfileSidebar = (props) => {
+const ProfileSideBar = (props) => {
 
     
 
@@ -13,4 +13,4 @@ const ProfileSidebar = (props) => {
     )
 }
 
-export default ProfileSidebar;
+export default ProfileSideBar;
