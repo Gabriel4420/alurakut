@@ -101,7 +101,7 @@ const [followers,setFollowers] = useState([]);
         </div>
 
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-          
+         
           <ProfileRelationsBox title="Seguidores" item={followers}/>
         
           
