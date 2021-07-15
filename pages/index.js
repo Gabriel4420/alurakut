@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
 import ProfileSidebar from '../src/components/ProfileSideBar';
 import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AluraKutCommons';
 import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
-
+import ProfileRelationsBox from '../src/components/ProfileRelationsBox';
 
 export default function Home() {
 
   const githubUserName = 'Gabriel4420';
- 
+
   const favoritePeoples = [
     'juunegreiros',
     'omariosouto',
@@ -23,13 +23,13 @@ export default function Home() {
 
   const [comunities, setComunities] = useState([{
     id: new Date().toISOString(),
-    title:'Eu odeio acordar cedo',
-    image:'https://alurakut.vercel.app/capa-comunidade-01.jpg'
+    title: 'Eu odeio acordar cedo',
+    image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
   }]);
 
 
   const handleForm = (e) => {
-    
+
     e.preventDefault();
 
 
@@ -47,9 +47,28 @@ export default function Home() {
     setComunities(updatedComunities);
 
   }
+  //0 - pegar o array de dados do github
+const [followers,setFollowers] = useState([]);
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${githubUserName}/followers`)
+    .then((res) => {
+      return res.json()
+    }).then((resConv) => {
+      setFollowers(resConv);
+    });
+
+  },[])
+
+
+  //1 - Criar um box que vai ter um map, baseado nos items do array
+  //que pegamos do github.
+
+
+
+
   return (
     <>
-      <AlurakutMenu githubUser={`${githubUserName}`}/>
+      <AlurakutMenu githubUser={`${githubUserName}`} />
       <MainGrid>
 
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
@@ -82,6 +101,10 @@ export default function Home() {
         </div>
 
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
+          
+          <ProfileRelationsBox title="Seguidores" item={followers}/>
+        
+          
           <ProfileRelationsBoxWrapper>
             <h3>Comunidades ({comunities.length}) </h3>
             <ul>
@@ -99,7 +122,7 @@ export default function Home() {
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper >
             <h2 className="smallTitle">Pessoas da comunidade ({favoritePeoples.length})</h2>
-            
+
             <ul>
               {favoritePeoples.map((people) => {
                 return (
