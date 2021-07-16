@@ -21,11 +21,7 @@ export default function Home() {
     'rocketseat'
   ]
 
-  const [comunities, setComunities] = useState([{
-    id: new Date().toISOString(),
-    title: 'Eu odeio acordar cedo',
-    image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
-  }]);
+  const [comunities, setComunities] = useState([]);
 
 
   const handleForm = (e) => {
@@ -36,17 +32,32 @@ export default function Home() {
     const dadosDoForm = new FormData(e.target);
 
     const objComunity = {
-      id: '113412341234123',
+      
       title: dadosDoForm.get('Title'),
-      image: dadosDoForm.get('image')
+      imageUrl: dadosDoForm.get('image'),
+      create_slug : githubUserName
     }
 
-    //spreads
-    const updatedComunities = [...comunities, objComunity];
+    fetch('/api/comunities',{
+      method:'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body:JSON.stringify(objComunity)
+    }).then(async (res) => {
+      const data = await res.json();
+      console.log(data)
+      const datoComunitiesPersistency = data.createdAtRegister;
+      const updatedComunities = [...comunities, datoComunitiesPersistency];
+      setComunities(updatedComunities);
+    })
 
-    setComunities(updatedComunities);
+    //spreads
+    
 
   }
+
+  const token = '5477287a44cc769ef54e366c34fcc8';
   //0 - pegar o array de dados do github
 const [followers,setFollowers] = useState([]);
   useEffect(() => {
@@ -56,6 +67,24 @@ const [followers,setFollowers] = useState([]);
     }).then((resConv) => {
       setFollowers(resConv);
     });
+    //API GraphQL
+    fetch('https://graphql.datocms.com/',{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        query: 'query{ allCommunities { id title imageUrl createSlug } }'
+      })
+    },
+    ).then((resp) => resp.json())
+    .then((respComplete) => {
+      const comunitiesDato = respComplete.data.allCommunities;
+      setComunities(comunitiesDato)
+      console.log(comunitiesDato)
+    })
 
   },[])
 
@@ -112,7 +141,7 @@ const [followers,setFollowers] = useState([]);
                 return (
                   <li key={itemAtual.id}>
                     <a href={`/users/${itemAtual.title}`}  >
-                      <img src={`${itemAtual.image}`} alt="Imagem de Perfil do usuário" />
+                      <img src={`${itemAtual.imageUrl}`} alt="Imagem de Perfil do usuário" />
                       <span>{itemAtual.title}</span>
                     </a>
                   </li>
