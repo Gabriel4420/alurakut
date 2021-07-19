@@ -4,7 +4,7 @@ import { ProfileRelationsBoxWrapper } from '../ProfileRelations';
 const ProfileRelationsBox = (props) => {
     const [followers,setFollowers] = useState([]);
   useEffect(() => {
-    fetch(`https://api.github.com/users/Gabriel4420/followers`)
+    fetch(`https://api.github.com/users/${props.githubUser}/followers`)
     .then((res) => {
       return res.json()
     }).then((resConv) => {
