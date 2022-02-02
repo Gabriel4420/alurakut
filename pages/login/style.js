@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const LoginScreenArea = styled.div`
+const LoginScreenArea = styled.div`
   padding: 16px;
   max-width: 1110px;
   display: grid;
@@ -90,7 +90,7 @@ export const LoginScreenArea = styled.div`
   }
 `
 
-export const LogoArea = styled.section`
+const LogoArea = styled.section`
   grid-area: logoArea;
   background-color: ${(props) => props.theme.colors.backgroundTertiary};
   border-radius: ${(props) => props.theme.border.commonRadius};
@@ -120,3 +120,4 @@ export const LogoArea = styled.section`
     margin-bottom: 36px;
   }
 `
+export default { LoginScreenArea, LogoArea }
