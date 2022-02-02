@@ -1,10 +1,8 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { AlurakutStyles } from '../src/lib/AluraKutCommons';
+
 const GlobalStyle = createGlobalStyle`
 
-  /* Reset CSS (Necolas Reset CSS ) */
-
-  * {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -28,30 +26,78 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
-  ${AlurakutStyles}
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  a,
+  button {
+    cursor: pointer;
+    transition: 0.3s;
+    outline: 0;
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+  input {
+    transition: 0.3s;
+    outline: 0;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+    &:hover,
+    &:focus {
+      box-shadow: 0px 0px 5px #33333357;
+    }
+  }
+
 `
 const theme = {
   colors: {
     backgroundSecondaryColor: '#F1F9FE',
-    backgroundDefaultColor:'#D9E6F6',
+    backgroundDefaultColor: '#D9E6F6',
     primaryTextColor: '#2E7BB4',
     secondaryTextColor: '#388BB0',
     tertiaryTextColor: '#2F4A71',
     primaryElementColor: '#6F92BB',
     anotherElementColor: '#5579A1',
-    downScaleGreyOne:'#333333',
-    downScaleGreyTwo:'#5A5A5A',
-    downScaleGreyThree:'#999999',
-    downScaleGreyFour:'#C5C6CA',
-    downScaleGreyFive:'#F4F4F4'
+    downScaleGreyOne: '#333333',
+    downScaleGreyTwo: '#5A5A5A',
+    downScaleGreyThree: '#999999',
+    downScaleGreyFour: '#C5C6CA',
+    downScaleGreyFive: '#F4F4F4',
+    backgroundPrimary: '#d9e6f6',
+    backgroundSecondary: '#f1f9fe',
+    backgroundTertiary: '#ffffff',
+    backgroundQuarternary: '#bbcde8',
+    colorPrimary: '#2e7bb4',
+    colorSecondary: '#388bb0',
+    colorTertiary: '#2f4a71',
+    colorQuarternary: '#d81d99',
+    textPrimaryColor: '#333333',
+    textSecondaryColor: '#ffffff',
+    textTertiaryColor: '#5a5a5a',
+    textQuarternaryColor: '#c5c6ca',
   },
-
-  
+  border: {
+    commonRadius: '8px',
+  },
 }
-
-
-
-
 
 export default function App({ Component, pageProps }) {
   return (
