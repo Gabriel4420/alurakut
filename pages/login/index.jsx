@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LoginScreenArea from './style'
-import LogoArea from './style'
+import LogoArea from './logoArea'
 import { useRouter } from 'next/router'
 import nookies from 'nookies'
 
