@@ -7,9 +7,11 @@
   },
   "dependencies": {
     "datocms-client": "^3.4.11",
+    "follow-redirects": "^1.14.9",
     "jsonwebtoken": "^8.5.1",
     "next": "latest",
     "nookies": "^2.5.2",
+    "parse-link-header": "^1.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
