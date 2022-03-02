@@ -8,7 +8,7 @@
   "dependencies": {
     "datocms-client": "^3.4.11",
     "follow-redirects": "^1.14.9",
-    "json-schema": "0.2.3",
+    "json-schema": "0.4.0",
     "jsonwebtoken": "^8.5.1",
     "jsprim": "1.4.1",
     "next": "latest",
